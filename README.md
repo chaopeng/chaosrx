@@ -17,12 +17,7 @@ public class Handler extends AbstractHttpHandler {
 
     @Path("/f2/{c}")
     @POST
-    Response f2(Request request,
-                @QueryParam("a") String a,
-                @HeaderParam("b") String b, 
-		@PathParam("c") String c, 
-		@HttpBody String body) {
-
+    Response f2(Request request, @QueryParam("a") String a, @HeaderParam("b") String b,  @PathParam("c") String c, @HttpBody String body){
         TestBody testbody = jsonDecode(body, TestBody.class);
         return renderJson(testbody);
     }

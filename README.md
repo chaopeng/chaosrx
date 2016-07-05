@@ -1,6 +1,6 @@
 # Chaosrx
 
-Chaosrx is a webservices framework base on Netty and JAX-RS. It is fast and easy develop. 
+Chaosrx is a webservices framework base on Netty and JAX-RS. It is fast and simple. 
 
 ## Example
 

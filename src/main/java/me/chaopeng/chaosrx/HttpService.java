@@ -12,8 +12,6 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-
 
 /**
  * HttpService
@@ -30,20 +28,19 @@ public class HttpService {
     private int numberOfBossThread;
     private int numberOfWorkerThread;
 
-    public HttpService(int port, Collection<AbstractHttpHandler> handlers) throws InterruptedException {
-        this(port, handlers, 2, Runtime.getRuntime().availableProcessors());
+    public HttpService(int port, HttpServiceHandler httpServiceHandler) throws InterruptedException {
+        this(port, httpServiceHandler, 2, Runtime.getRuntime().availableProcessors());
     }
 
-    public HttpService(int port, Collection<AbstractHttpHandler> handlers, int numberOfBossThread, int numberOfWorkerThread) throws InterruptedException {
+    public HttpService(int port, HttpServiceHandler httpServiceHandler, int numberOfBossThread, int numberOfWorkerThread) throws InterruptedException {
         this.port = port;
         this.httpServiceHandler = new HttpServiceHandler();
-        this.httpServiceHandler.setHttpRouter(new HttpRouter(handlers));
+        this.httpServiceHandler = httpServiceHandler;
         this.numberOfBossThread = numberOfBossThread;
         this.numberOfWorkerThread = numberOfWorkerThread;
-        run();
     }
 
-    private void run() throws InterruptedException {
+    public void start() throws InterruptedException {
         EventLoopGroup boss = new NioEventLoopGroup(this.numberOfBossThread);
         EventLoopGroup workers = new NioEventLoopGroup(this.numberOfWorkerThread);
 

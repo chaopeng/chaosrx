@@ -24,7 +24,9 @@ class HttpRouterTest extends Specification {
     String testBodyStr
 
     def setup(){
-        router = new HttpRouter(Lists.newArrayList(new TestHandler()))
+        HttpServiceHandler serviceHandler = new HttpServiceHandler()
+        serviceHandler.setHttpRouter(new HttpRouter([new TestHandler()]))
+        new HttpService(8888, serviceHandler).start()
 
         TestBody testBody = new TestBody(aa: 1, bb: "bb")
 

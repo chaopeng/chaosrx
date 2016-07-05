@@ -5,7 +5,8 @@ Chaosrx is a webservices framework base on Netty and JAX-RS. It is fast and easy
 ## Example
 
 ### handler
-```
+
+```java
 @Path("/")
 public class Handler extends AbstractHttpHandler {
 
@@ -22,14 +23,15 @@ public class Handler extends AbstractHttpHandler {
 		@PathParam("c") String c, 
 		@HttpBody String body) {
 
-        def testbody = jsonDecode(body, TestBody)
-        return renderJson(testbody)
+        TestBody testbody = jsonDecode(body, TestBody.class);
+        return renderJson(testbody);
     }
 }
 ```
 
 ### start a server
-```
+
+```java
 HttpRouter router = new HttpRouter(Lists.newArrayList(
 	new Handler()
 ));

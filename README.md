@@ -2,6 +2,20 @@
 
 Chaosrx is a webservices framework base on Netty and JAX-RS. It is fast and simple. 
 
+## how to get it
+
+```maven
+<dependency>
+  <groupId>me.chaopeng.chaosrx</groupId>
+  <artifactId>chaosrx</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+```gradle
+'me.chaopeng.chaosrx:chaosrx:1.0.0'
+```
+
 ## Example
 
 ### handler

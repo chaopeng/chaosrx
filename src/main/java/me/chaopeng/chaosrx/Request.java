@@ -35,9 +35,11 @@ public class Request {
         this.httpRequest = httpRequest;
         this.httpContent = httpContent == null ? null : httpContent.content();
 
-        path = UrlUtils.path(httpRequest.uri());
+        String[] ss = httpRequest.uri().split("\\?");
+        
+        path = UrlUtils.path(ss[0]);
 
-        queryParameters = UrlUtils.querys(httpRequest.uri());
+        queryParameters = UrlUtils.querys(ss[1]);
 
         httpRequest.headers().forEach(entry -> headerParameters.put(entry.getKey(), entry.getValue()));
     }

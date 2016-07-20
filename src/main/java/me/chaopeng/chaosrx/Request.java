@@ -6,6 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.HttpContent;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpRequest;
+import io.netty.handler.codec.http.QueryStringDecoder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
@@ -35,11 +36,11 @@ public class Request {
         this.httpRequest = httpRequest;
         this.httpContent = httpContent == null ? null : httpContent.content();
 
-        String[] ss = httpRequest.uri().split("\\?");
-        
-        path = UrlUtils.path(ss[0]);
+        QueryStringDecoder decoder = new QueryStringDecoder(httpRequest.uri());
 
-        queryParameters = UrlUtils.querys(ss[1]);
+        path = UrlUtils.path(decoder.path());
+
+        queryParameters = decoder.parameters();
 
         httpRequest.headers().forEach(entry -> headerParameters.put(entry.getKey(), entry.getValue()));
     }

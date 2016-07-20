@@ -23,7 +23,7 @@ apply plugin: 'com.github.ben-manes.versions'
 apply from: 'publish.gradle'
 
 
-project.version = '1.0.0'
+project.version = '1.0.1'
 
 compileJava.options.encoding = 'UTF-8'
 sourceCompatibility = JavaVersion.VERSION_1_8

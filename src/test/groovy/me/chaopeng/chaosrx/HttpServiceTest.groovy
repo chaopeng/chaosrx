@@ -18,7 +18,10 @@ class HttpServiceTest extends Specification {
     static def JSON = MediaType.parse("application/json; charset=utf-8")
 
     def setupSpec(){
-        new HttpService(8888, [new TestHandler()])
+        def router = new HttpRouter([new TestHandler()])
+        def handler = new HttpServiceHandler()
+        handler.setHttpRouter(router)
+        new HttpService(8888, handler).start()
     }
 
     def index(){
